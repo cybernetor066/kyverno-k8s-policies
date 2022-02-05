@@ -1,0 +1,49 @@
+# Creating a redis pod and mounting a file with Non persistent storage
+apiVersion: kyverno.io/v1
+kind: Pod
+metadata:
+  name: test-redis
+spec:
+  # Adding a service account name
+  serviceAccountName: admin
+  volumes: 
+    - name: redis-storage
+      emptyDir: {}
+  containers:
+    - name: redis
+      image: redis
+      ports:
+        - containerPort: 6379
+      volumeMounts:
+        - mountPath: /data/redis
+          name: redis-storage
+      resources:
+        limits:
+          memory: 512Mi
+          cpu: "1"
+        requests:
+          memory: 256Mi
+          cpu: "0.2"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
